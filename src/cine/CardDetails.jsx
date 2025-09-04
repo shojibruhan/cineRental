@@ -3,33 +3,38 @@ import removeItem from "../assets/delete.svg";
 import checkOut from "../assets/icons/checkout.svg";
 import { MovieContext } from "../context";
 import { getImageUrl } from "../utils/cine-utility";
+
 const CardDetails = ({ onClose }) => {
-  const { cartData, setCartData } = useContext(MovieContext);
-  console.log("cartData", cartData);
+  const { state, dispatch } = useContext(MovieContext);
+  console.log("cartData cartDelails", state.cartData);
 
-  const handleDeleteCart = (e, itemId) => {
+  const handleDeleteCart = (e, item) => {
     e.preventDefault();
-    const filteredItem = cartData.filter((item) => {
-      return item.id !== itemId;
-    });
+    // const filteredItem = state.cartData.filter((item) => {
+    //   return item.id !== itemId;
+    // });
 
-    setCartData([...filteredItem]);
+    // setCartData([...filteredItem]);
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: item,
+    });
   };
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-sm">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[420px] sm:max-w-[600px] lg:max-w-[790px] p-4 max-h-[90vh] overflow-auto">
-        <div className="bg-white dark:bg-[#12141D] shadow-md  rounded-2xl overflow-hidden p-5 md:p-9 ">
+        <div className="bg-white dark:bg-[#12141D] dark:text-white shadow-md  rounded-2xl overflow-hidden p-5 md:p-9 ">
           <h2 className="text-2xl lg:text-[30px] mb-10 font-bold">
             Your Carts
           </h2>
           <div className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14">
-            {cartData.length === 0 ? (
+            {state.cartData.length === 0 ? (
               <p className="text-3xl font-semibold font-serif text-center text-gray-500">
                 Your Cart is Empty.
               </p>
             ) : (
-              cartData.map((item) => (
+              state.cartData.map((item) => (
                 <div key={item.id} className="grid grid-cols-[1fr_auto] gap-4">
                   <div className="flex items-center gap-4">
                     <img
@@ -51,7 +56,7 @@ const CardDetails = ({ onClose }) => {
                   </div>
                   <div className="flex justify-between gap-4 items-center">
                     <button
-                      onClick={(e) => handleDeleteCart(e, item.id)}
+                      onClick={(e) => handleDeleteCart(e, item)}
                       className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
                     >
                       <img

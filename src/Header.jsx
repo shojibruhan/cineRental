@@ -9,10 +9,10 @@ import { MovieContext, ThemeContext } from "./context";
 
 const Header = () => {
   const [showCard, setShowCard] = useState(false);
-  const { cartData } = useContext(MovieContext);
+  const { state } = useContext(MovieContext);
   const { darkMood, setDarkMood } = useContext(ThemeContext);
 
-  console.log(cartData);
+  console.log("state:", state.cartData);
 
   const handleCartShow = () => {
     setShowCard(true);
@@ -60,9 +60,9 @@ const Header = () => {
                 height="24"
                 alt="shoppingCart"
               />
-              {cartData.length > 0 && (
+              {state.cartData.length > 0 && (
                 <span className="rounded-full absolute top-[-12px] left-[28px] p-[2px] w-[30px] h-[30px] bg-[#12CF6F] text-white text-center">
-                  {cartData.length}
+                  {state.cartData.length}
                 </span>
               )}
             </a>
