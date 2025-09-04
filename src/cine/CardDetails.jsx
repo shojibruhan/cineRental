@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { toast } from "react-toastify";
 import removeItem from "../assets/delete.svg";
 import checkOut from "../assets/icons/checkout.svg";
 import { MovieContext } from "../context";
@@ -18,6 +19,9 @@ const CardDetails = ({ onClose }) => {
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: item,
+    });
+    toast.success(`Movie ${item.title} has been removed successfully`, {
+      position: "bottom-right",
     });
   };
 

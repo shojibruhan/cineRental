@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import { MovieContext } from "../context";
 import { getImageUrl } from "../utils/cine-utility";
 import MovieDetailsModal from "./MovieDetailsModal";
@@ -35,8 +36,16 @@ const MovieCard = ({ movie }) => {
           ...movie,
         },
       });
+      toast.success(`Movie ${movie.title} added sucsessfully`, {
+        position: "bottom-right",
+      });
     } else {
-      console.log(`The movie: '${movie.title}' has been already added to cart`);
+      toast.error(
+        `The movie: '${movie.title}' has been already added to cart`,
+        {
+          position: "bottom-right",
+        }
+      );
     }
   };
   return (
