@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
-/* @custom-variant dark (&:where(.dark, .dark *)); */
-
 @theme {
   --color-primary: #00d991;
-  /* --color-primary-dark: #171923; */
-
-  --container-padding: 1.25rem;
 }
+@custom-variant dark (&:where(.dark, .dark *));
+
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+}
+
 .dark {
-  @apply bg-[#171923] text-white;
+  background-color: #111;
+  color: white;
 }

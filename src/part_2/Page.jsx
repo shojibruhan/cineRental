@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import MovieList from "./cinema/MovieList";
-import { MovieContext } from "./context";
+import { DarkMoodContext } from "./context";
 
 const Page = () => {
-  const [cartData, setCartData] = useState([]);
+  const { darkMood } = useContext(DarkMoodContext);
+
   return (
     <>
-      <MovieContext.Provider value={{ cartData, setCartData }}>
+      <div className={` h-full w-full ${darkMood ? "dark" : ""}`}>
         <Header />
         <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
           <Sidebar />
           <MovieList />
         </div>
         <Footer />
-      </MovieContext.Provider>
+      </div>
     </>
   );
 };

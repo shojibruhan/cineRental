@@ -1,5 +1,6 @@
 import { createContext } from "react";
 
 const MovieContext = createContext();
+const DarkMoodContext = createContext();
 
-export { MovieContext };
+export { DarkMoodContext, MovieContext };
