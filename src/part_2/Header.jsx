@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import moon from "../assets/icons/moon.svg";
 import sun from "../assets/icons/sun.svg";
 import Logo from "../assets/logo.svg";
 import ring from "../assets/ring.svg";
 import shoppingCart from "../assets/shopping-cart.svg";
 import CartDetails from "./cinema/CartDetails";
+import { MovieContext } from "./context";
 const Header = () => {
   const [darkMood, setDarkMood] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  const { cartData } = useContext(MovieContext);
   return (
     <header>
       {showCart && <CartDetails onClose={() => setShowCart(false)} />}
@@ -40,6 +42,11 @@ const Header = () => {
               onClick={() => setShowCart(true)}
             >
               <img src={shoppingCart} width="24" height="24" alt="" />
+              {cartData.length > 0 && (
+                <span className="rounded-full absolute top-[-12px] left-[28px] p-[2px] w-[30px] h-[30px] bg-[#12CF6F] text-white text-center">
+                  {cartData.length}
+                </span>
+              )}
             </a>
           </li>
         </ul>
